@@ -7,13 +7,20 @@ function onCreate(is_world_create)
 	for _, player in pairs(server.getPlayers()) do
 		steam_ids[player.id] = tostring(player.steam_id)
 	end
+	data = json.stringify({
+		name = "Server",
+		msg = "Server is up!",
+		password = webpass
+	})
+	server.httpGet(port, "/sendsystem/" .. encode(data))
 end
 
 function onPlayerJoin(steam_id, name, peer_id, admin, auth)
 	steam_ids[peer_id] = tostring(steam_id)
 	data = json.stringify({
 		name = "Server",
-		msg = name .. " joined the game"
+		msg = name .. " joined the game",
+		password = webpass
 	})
 	server.httpGet(port, "/sendsystem/" .. encode(data))
 end
@@ -22,7 +29,8 @@ function onPlayerLeave(steam_id, name, peer_id, admin, auth)
 	steam_ids[peer_id] = nil
 	data = json.stringify({
 		name = "Server",
-		msg = name .. " left the game"
+		msg = name .. " left the game",
+		password = webpass
 	})
 	server.httpGet(port, "/sendsystem/" .. encode(data))
 end
