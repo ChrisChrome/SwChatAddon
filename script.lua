@@ -16,6 +16,7 @@ function onCreate(is_world_create)
 end
 
 function onPlayerJoin(steam_id, name, peer_id, admin, auth)
+	if name == "Server" then return false end
 	steam_ids[peer_id] = tostring(steam_id)
 	data = json.stringify({
 		name = "Server",
@@ -26,6 +27,7 @@ function onPlayerJoin(steam_id, name, peer_id, admin, auth)
 end
 
 function onPlayerLeave(steam_id, name, peer_id, admin, auth)
+	if name == "Server" then return false end
 	steam_ids[peer_id] = nil
 	data = json.stringify({
 		name = "Server",
