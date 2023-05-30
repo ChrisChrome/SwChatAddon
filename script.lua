@@ -11,6 +11,20 @@ end
 
 function onPlayerJoin(steam_id, name, peer_id, admin, auth)
 	steam_ids[peer_id] = tostring(steam_id)
+	data = json.stringify({
+		name = "Server",
+		msg = name .. " joined the game"
+	})
+	server.httpGet(port, "/sendsystem/" .. encode(data))
+end
+
+function onPlayerLeave(steam_id, name, peer_id, admin, auth)
+	steam_ids[peer_id] = nil
+	data = json.stringify({
+		name = "Server",
+		msg = name .. " left the game"
+	})
+	server.httpGet(port, "/sendsystem/" .. encode(data))
 end
 
 -- Tick function that will be executed every logic tick
