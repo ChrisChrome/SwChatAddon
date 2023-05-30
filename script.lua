@@ -9,6 +9,10 @@ function onCreate(is_world_create)
 	end
 end
 
+function onPlayerJoin(steam_id, name, peer_id, admin, auth)
+	steam_ids[peer_id] = tostring(steam_id)
+end
+
 -- Tick function that will be executed every logic tick
 function onTick(game_ticks)
 	tick = tick + 1
