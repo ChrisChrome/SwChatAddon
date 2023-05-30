@@ -20,7 +20,7 @@ function onPlayerJoin(steam_id, name, peer_id, admin, auth)
 	steam_ids[peer_id] = tostring(steam_id)
 	data = json.stringify({
 		name = "Server",
-		msg = name .. " joined the game",
+		msg = "[" .. name .. "](<https://steamcommunity.com/id/" .. tostring(steam_id) .. ">) joined the game",
 		password = webpass
 	})
 	server.httpGet(port, "/sendsystem/" .. encode(data))
@@ -31,7 +31,7 @@ function onPlayerLeave(steam_id, name, peer_id, admin, auth)
 	steam_ids[peer_id] = nil
 	data = json.stringify({
 		name = "Server",
-		msg = name .. " left the game",
+		msg = "[" .. name .. "](<https://steamcommunity.com/id/" .. tostring(steam_id) .. ">) left the game",
 		password = webpass
 	})
 	server.httpGet(port, "/sendsystem/" .. encode(data))
