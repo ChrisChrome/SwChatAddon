@@ -40,7 +40,7 @@ end
 -- Tick function that will be executed every logic tick
 function onTick(game_ticks)
 	tick = tick + 1
-	if tick == 30 then
+	if tick < 30 then
 		server.httpGet(port, "/get/" .. webpass)
 		tick = 0
 	end
