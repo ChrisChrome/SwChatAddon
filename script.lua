@@ -2,6 +2,15 @@ port = 9005
 steam_ids = {}
 webpass = "ChangeMeFuckBoi"
 tick = 0
+server_identity = "Server" -- Used for notifying other addons of which server this is, as you have to have separate chat addon files for each server
+
+function onCustomCommand(full_message, user_peer_id, is_admin, is_auth, command)
+	if user_peer_id ~= -1 then return end -- Not an addon, nope, no sir it isn't
+	if command == "ident" then
+		server.command("identresp " .. server_identity)
+	end
+end
+
 
 function onCreate(is_world_create)
 	for _, player in pairs(server.getPlayers()) do
